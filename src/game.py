@@ -202,6 +202,3 @@ class Game2048:
         if not skip:
             new_row.append(next_val)
         return new_row
-
-game = Game2048()
-game.play()
