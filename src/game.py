@@ -26,7 +26,7 @@ class Game2048:
         repr += line_section
         for row in range(self.total_row):
             row_value = [self._get_tile_value(row, col) for col in range(self.total_col)]
-            row_string_value = [str(val).rjust(4, ' ') for val in row_value]
+            row_string_value = [str(val).rjust(4, ' ') if val != 0 else ' '*4 for val in row_value]
             middle = ' | '.join(row_string_value)
             row_repr = '| ' + middle + ' |\n'
             repr += row_repr
