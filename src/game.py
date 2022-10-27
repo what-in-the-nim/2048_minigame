@@ -57,7 +57,13 @@ class Game2048:
         for tile in self.board:
             if tile == 0:
                 return False
-        return True
+
+        lost = not (self.is_squishable(UP) 
+                  | self.is_squishable(DOWN)
+                  | self.is_squishable(LEFT)
+                  | self.is_squishable(RIGHT))
+
+        return lost
 
     def is_squishable(self, direction: str) -> bool:
         """ Check if tiles can be moved into certain direction. """
@@ -116,8 +122,10 @@ class Game2048:
                 print('Please choose a given key to play!'.upper())
         return move
 
-    def play(self) -> None:
+    def play(self, board: Board = None) -> None:
         """ Start playing a game. """
+        if board is not None:
+            self.board = board
         while True:
             self.show_board()
 
@@ -139,6 +147,7 @@ class Game2048:
             self._move_tiles(move)
 
             if self.is_won:
+                self.show_board()
                 print('You Win!')
                 break
 
